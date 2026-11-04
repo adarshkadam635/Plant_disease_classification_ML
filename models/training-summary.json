@@ -1,0 +1,26 @@
+{
+  "state": "complete",
+  "epochs": 2,
+  "epoch": 2,
+  "train_images": 70295,
+  "validation_images": 17572,
+  "best_validation_accuracy": 0.9887320737536991,
+  "metrics": [
+    {
+      "epoch": 1,
+      "train_loss": 0.9063387797294975,
+      "train_accuracy": 0.7419446617824881,
+      "validation_loss": 0.9690643981958371,
+      "validation_accuracy": 0.7166514910084225
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.18999699875614354,
+      "train_accuracy": 0.9413898570310832,
+      "validation_loss": 0.03656384710171208,
+      "validation_accuracy": 0.9887320737536991
+    }
+  ],
+  "finished_at": "2026-11-04T18:51:19.798642+00:00",
+  "application_verified": true
+}

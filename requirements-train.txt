@@ -1,0 +1,6 @@
+-r requirements.txt
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.15.0+cpu
+kagglehub==1.0.3
+filelock==4.2.4
+onnx==1.23.2

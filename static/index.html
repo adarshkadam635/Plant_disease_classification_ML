@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173e30">
+  <meta name="description" content="A clearer picture of plant health. Upload or photograph a leaf to analyze it with LeafLens.">
+  <title>LeafLens · Plant health dashboard</title>
+  <link rel="icon" href="/static/leaf.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<aside class="sidebar">
+  <a class="brand" href="/" aria-label="LeafLens home"><span class="brand-icon" data-icon="leaf"></span>LeafLens<span class="brand-dot">.</span></a>
+  <p class="nav-label">YOUR WORKSPACE</p>
+  <nav aria-label="Main navigation">
+    <a href="#dashboard" class="nav-link active" data-view="dashboard"><span data-icon="grid"></span>Overview<span class="nav-dot"></span></a>
+    <a href="#history" class="nav-link" data-view="history"><span data-icon="history"></span>Scan history<span id="history-count" class="count">0</span></a>
+    <a href="#library" class="nav-link" data-view="library"><span data-icon="book"></span>Plant library</a>
+    <a href="#guide" class="nav-link" data-view="guide"><span data-icon="help"></span>Photo guide</a>
+  </nav>
+  <div class="sidebar-bottom"><div class="sidebar-note"><span data-icon="sprout"></span><h3>Small checks.<br>Healthier harvests.</h3><p>Make leaf checks part of your growing routine.</p><a href="#guide">Get a better photo <span aria-hidden="true">↗</span></a></div><div class="workspace"><span class="avatar">G</span><div><strong>Grower's workspace</strong><small>Local & private</small></div><span data-icon="shield"></span></div></div>
+</aside>
+<div class="app-shell">
+  <header class="topbar"><div class="breadcrumb">Workspace <span>/</span> <strong id="breadcrumb">Overview</strong></div><div class="topbar-right"><span class="local-indicator"></span><span>Local workspace</span><span class="avatar small">G</span></div></header>
+  <main id="main" tabindex="-1">
+    <section id="dashboard" class="view">
+      <div class="page-heading"><div><p class="eyebrow">A LITTLE CARE GOES A LONG WAY</p><h1>Let's check on your plants.</h1><p>One leaf. A little insight. A healthier place to grow.</p></div><span class="date" id="today"></span></div>
+      <div class="hero"><div class="hero-copy"><span class="pill"><span class="tiny-dot"></span> PLANT HEALTH, IN FOCUS</span><h2>Healthy plants start<br>with a closer look.</h2><p>Turn a leaf photo into insight. Check for signs of disease with your ResNet-9 plant classifier.</p><button class="button cream" id="hero-scan">Start a leaf scan <span data-icon="arrow"></span></button></div><div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><img src="/static/leaf.svg" alt=""><span class="art-tag"><span data-icon="scan"></span> A fresh perspective</span><span class="cross cross-one">+</span><span class="cross cross-two">+</span></div></div>
+      <div class="stats"><article class="stat"><span class="stat-icon mint" data-icon="scan"></span><div><p>Your leaf scans</p><strong id="scan-total">0</strong><small>Saved on this device</small></div></article><article class="stat"><span class="stat-icon sand" data-icon="leaf"></span><div><p>Plant varieties</p><strong>14 <span>supported</span></strong><small>From apple to tomato</small></div></article><article class="stat"><span class="stat-icon lavender" data-icon="layers"></span><div><p>Classification model</p><strong>ResNet-9</strong><small>38 leaf conditions</small></div></article></div>
+      <div class="section-heading"><div><h2>A closer look at your leaf</h2><p>Upload a photo or use your camera to get started.</p></div><span class="step-label">STEP 01 <span>/</span> CAPTURE & ANALYZE</span></div>
+      <div class="scan-layout">
+        <section class="card scan-card" aria-label="Leaf image scanner"><div class="card-heading"><h3><span data-icon="scan"></span>New leaf scan</h3><span class="badge">JPG · PNG · WEBP</span></div>
+          <div class="tabs" role="group" aria-label="Image source"><button id="upload-tab" class="tab selected" aria-pressed="true"><span data-icon="upload"></span>Upload image</button><button id="camera-tab" class="tab" aria-pressed="false"><span data-icon="camera"></span>Take a photo</button></div>
+          <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp" hidden><input type="file" id="capture-input" accept="image/jpeg,image/png,image/webp" capture="environment" hidden>
+          <div id="upload-panel"><button type="button" id="dropzone" class="dropzone"><span class="upload-symbol" data-icon="upload"></span><strong>Drop your leaf image here</strong><span>or <b>browse files</b> to choose a photo</span><small>JPG, PNG or WebP · up to 10 MB</small></button></div>
+          <div id="camera-panel" hidden><div class="camera-frame"><video id="camera" autoplay playsinline muted aria-label="Live camera preview"></video><div class="camera-placeholder" id="camera-placeholder"><span data-icon="camera"></span><p>Bring your leaf into focus.</p><small>Camera access stays on your device.</small></div></div><div class="camera-actions"><button id="start-camera" class="button secondary">Enable camera</button><button id="capture" class="button primary" disabled>Capture photo</button><button id="native-camera" class="text-button">Use device camera</button></div></div>
+          <div id="preview-panel" hidden><div class="preview-frame"><img id="preview" alt="Selected leaf image"><button id="remove-image" class="remove" aria-label="Remove selected image">×</button></div><div class="file-meta"><span data-icon="image"></span><span id="file-name"></span><small id="file-size"></small></div></div>
+          <p id="scan-error" class="error" role="alert" hidden></p><p class="privacy"><span data-icon="shield"></span>Images are processed on this server and are not stored.</p><button id="analyze" class="button primary analyze" disabled><span data-icon="sparkles"></span><span id="analyze-label">Analyze leaf</span><span data-icon="arrow"></span></button>
+        </section>
+        <aside class="right-column"><section id="results" class="card result-card" aria-live="polite"><div class="card-heading"><h3>Analysis results</h3><span class="badge" id="result-badge">WAITING FOR IMAGE</span></div><div id="result-content" class="result-empty"><span class="result-symbol" data-icon="leaf"></span><h3>Your next insight starts here.</h3><p>Add a clear photo of a single leaf.<br>Your results will appear in this space.</p><div class="result-steps"><span>01 &nbsp; Add a photo</span><span>02 &nbsp; Analyze</span><span>03 &nbsp; Explore results</span></div></div></section><section class="photo-tip"><span class="tip-icon" data-icon="sun"></span><div><h3>A better photo, a better check.</h3><p>Use natural light, a plain background, and one leaf in sharp focus.</p><a href="#guide">See the photo guide <span aria-hidden="true">↗</span></a></div></section></aside>
+      </div>
+      <div id="model-status" class="model-status" role="status"><span data-icon="layers"></span><span>Checking model availability…</span></div>
+      <div class="section-heading recent-heading"><div><h2>Recent scans</h2><p>Your growing knowledge, one leaf at a time.</p></div><a class="inline-link" href="#history">View scan history <span aria-hidden="true">↗</span></a></div><div id="recent-scans" class="card history-list"></div>
+    </section>
+    <section id="history" class="view" hidden><div class="page-heading"><div><p class="eyebrow">YOUR GROWING RECORD</p><h1>Scan history</h1><p>Results saved in this browser. Your leaf images are never saved.</p></div><button id="clear-history" class="button secondary">Clear history</button></div><div id="all-scans" class="card history-list"></div></section>
+    <section id="library" class="view" hidden><div class="page-heading"><div><p class="eyebrow">KNOW WHAT YOU GROW</p><h1>Plant library</h1><p>Explore the 14 plant varieties and 38 conditions supported by this model.</p></div></div><label class="search-label" for="plant-search">Search plants or conditions</label><input type="search" id="plant-search" placeholder="Try tomato, apple, or blight…"><div id="plant-library" class="plant-grid"></div></section>
+    <section id="guide" class="view" hidden><div class="page-heading"><div><p class="eyebrow">SET YOUR SCAN UP FOR SUCCESS</p><h1>A good photo makes a difference.</h1><p>A few simple steps for a clearer view of your plant's health.</p></div></div><div class="guide-grid"><article class="card"><span class="guide-number">01</span><h2>Find the light</h2><p>Use soft, natural daylight. Avoid flash, harsh shadows, and bright reflections that hide details.</p></article><article class="card"><span class="guide-number">02</span><h2>Focus on one leaf</h2><p>Fill most of the frame with a single leaf. Keep the whole leaf visible and the surface sharp.</p></article><article class="card"><span class="guide-number">03</span><h2>Keep it simple</h2><p>Use a plain background and photograph the affected side. Upload JPEG, PNG, or WebP images under 10 MB.</p></article><article class="card"><span class="guide-number">04</span><h2>Read with context</h2><p>The model only knows the plants and conditions in the library. It can misclassify other plants and non-leaf images. Confidence is not diagnostic certainty.</p></article></div><div class="model-status"><span data-icon="camera"></span><p>Camera capture requires localhost or HTTPS and your browser's camera permission. If unavailable, use the device camera option or upload a photo.</p></div><a class="button primary" href="#dashboard">Ready? Scan a leaf <span aria-hidden="true">→</span></a></section>
+    <footer><span class="footer-brand"><span data-icon="leaf"></span>LeafLens</span><span>A little insight. A healthier harvest.</span><span>Powered by ResNet-9</span></footer>
+  </main>
+</div>
+</body></html>
