@@ -1,5 +1,7 @@
 ﻿# LeafLens — Plant Disease Classification
 
+**Live demo:** [Plant Disease Classification on Vercel](https://plant-disease-classification-peach.vercel.app)
+
 A responsive dashboard for classifying leaf images across **38 conditions and 14 plant varieties**. Upload a photo, drag it into the dashboard, or capture one with your camera. The included trained ResNet-9 model runs on your server through ONNX Runtime, without an external AI API.
 
 ## Features
